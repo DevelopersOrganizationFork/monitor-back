@@ -26,3 +26,6 @@
 
 `debug.bat` - uruchamia serwer w trybie debug (`tomcat/bin/catalina.bat jpda start`) standardowo debuger nasłuchuje na porcie **8000**
 
+###Po uruchomieniu serwera należy sprawdzić czy aplikacja odpowiada prawidłowo:
+`http://localhost:18080/monitor-back/rest/hello`
+
