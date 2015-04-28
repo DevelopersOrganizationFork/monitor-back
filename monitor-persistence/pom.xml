@@ -4,7 +4,7 @@
     <groupId>org.developers.monitor</groupId>
     <artifactId>monitor-persistence</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>monitor-persistence</name>
 
