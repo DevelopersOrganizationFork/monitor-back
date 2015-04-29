@@ -1,22 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.developers.monitor.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.UUID;
 
+/**
+ *
+ * @author Silwest
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class HelloMessage {
+public class SensorData {
 
     public String id;
     public String message;
-    public String datetime;
 
-    public HelloMessage(String message) {
+    public SensorData(String message) {
         this.id = UUID.randomUUID().toString();
         this.message = message;
-        this.datetime = LocalDate.now() + " " + LocalTime.now();
     }
-
 }
