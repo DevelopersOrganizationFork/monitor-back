@@ -9,17 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,49 +28,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Measurement.findAll", query = "SELECT m FROM Measurement m"),
-    @NamedQuery(name = "Measurement.findByMeasurementId", query = "SELECT m FROM Measurement m WHERE m.measurementId = :measurementId"),
+    @NamedQuery(name = "Measurement.findByMeasurementId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.measurementId = :measurementId"),
+    @NamedQuery(name = "Measurement.findByMemorymemoryId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.memorymemoryId = :memorymemoryId"),
+    @NamedQuery(name = "Measurement.findByNetworknetworkId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.networknetworkId = :networknetworkId"),
+    @NamedQuery(name = "Measurement.findByDiskdiskID", query = "SELECT m FROM Measurement m WHERE m.measurementPK.diskdiskID = :diskdiskID"),
+    @NamedQuery(name = "Measurement.findByCPUCPUId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.cPUCPUId = :cPUCPUId"),
     @NamedQuery(name = "Measurement.findBySensorsensorId", query = "SELECT m FROM Measurement m WHERE m.sensorsensorId = :sensorsensorId"),
-    @NamedQuery(name = "Measurement.findByMeasurementValue", query = "SELECT m FROM Measurement m WHERE m.measurementValue = :measurementValue"),
-    @NamedQuery(name = "Measurement.findByMeasurementDate", query = "SELECT m FROM Measurement m WHERE m.measurementDate = :measurementDate"),
-    @NamedQuery(name = "Measurement.findByMeasurementType", query = "SELECT m FROM Measurement m WHERE m.measurementType = :measurementType")})
+    @NamedQuery(name = "Measurement.findByMeasurementDate", query = "SELECT m FROM Measurement m WHERE m.measurementDate = :measurementDate")})
 public class Measurement implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "measurementId")
-    private Integer measurementId;
+    @EmbeddedId
+    protected org.developers.monitor.persistence.MeasurementPK measurementPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Sensor_sensorId")
     private int sensorsensorId;
-    @Column(name = "measurementValue")
-    private Integer measurementValue;
     @Column(name = "measurementDate")
     @Temporal(TemporalType.DATE)
     private Date measurementDate;
-    @Size(max = 50)
-    @Column(name = "measurementType")
-    private String measurementType;
 
     public Measurement() {
     }
 
-    public Measurement(Integer measurementId) {
-        this.measurementId = measurementId;
+    public Measurement(org.developers.monitor.persistence.MeasurementPK measurementPK) {
+        this.measurementPK = measurementPK;
     }
 
-    public Measurement(Integer measurementId, int sensorsensorId) {
-        this.measurementId = measurementId;
+    public Measurement(org.developers.monitor.persistence.MeasurementPK measurementPK, int sensorsensorId) {
+        this.measurementPK = measurementPK;
         this.sensorsensorId = sensorsensorId;
     }
 
-    public Integer getMeasurementId() {
-        return measurementId;
+    public Measurement(int measurementId, int memorymemoryId, int networknetworkId, int diskdiskID, int cPUCPUId) {
+        this.measurementPK = new MeasurementPK(measurementId, memorymemoryId, networknetworkId, diskdiskID, cPUCPUId);
     }
 
-    public void setMeasurementId(Integer measurementId) {
-        this.measurementId = measurementId;
+    public org.developers.monitor.persistence.MeasurementPK getMeasurementPK() {
+        return measurementPK;
+    }
+
+    public void setMeasurementPK(org.developers.monitor.persistence.MeasurementPK measurementPK) {
+        this.measurementPK = measurementPK;
     }
 
     public int getSensorsensorId() {
@@ -84,14 +79,6 @@ public class Measurement implements Serializable {
         this.sensorsensorId = sensorsensorId;
     }
 
-    public Integer getMeasurementValue() {
-        return measurementValue;
-    }
-
-    public void setMeasurementValue(Integer measurementValue) {
-        this.measurementValue = measurementValue;
-    }
-
     public Date getMeasurementDate() {
         return measurementDate;
     }
@@ -100,18 +87,10 @@ public class Measurement implements Serializable {
         this.measurementDate = measurementDate;
     }
 
-    public String getMeasurementType() {
-        return measurementType;
-    }
-
-    public void setMeasurementType(String measurementType) {
-        this.measurementType = measurementType;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (measurementId != null ? measurementId.hashCode() : 0);
+        hash += (measurementPK != null ? measurementPK.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +101,7 @@ public class Measurement implements Serializable {
             return false;
         }
         Measurement other = (Measurement) object;
-        if ((this.measurementId == null && other.measurementId != null) || (this.measurementId != null && !this.measurementId.equals(other.measurementId))) {
+        if ((this.measurementPK == null && other.measurementPK != null) || (this.measurementPK != null && !this.measurementPK.equals(other.measurementPK))) {
             return false;
         }
         return true;
@@ -130,7 +109,7 @@ public class Measurement implements Serializable {
 
     @Override
     public String toString() {
-        return "org.developers.monitor.monitor.persistence.Measurement[ measurementId=" + measurementId + " ]";
+        return "org.developers.monitor.persistence.Measurement[ measurementPK=" + measurementPK + " ]";
     }
     
 }

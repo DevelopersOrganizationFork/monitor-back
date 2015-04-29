@@ -85,7 +85,7 @@ public class Sensor implements Serializable {
 
     @Override
     public String toString() {
-        return "org.developers.monitor.monitor.persistence.Sensor[ sensorId=" + sensorId + " ]";
+        return "org.developers.monitor.persistence.Sensor[ sensorId=" + sensorId + " ]";
     }
     
 }

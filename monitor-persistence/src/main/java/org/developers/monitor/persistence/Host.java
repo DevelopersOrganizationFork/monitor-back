@@ -119,7 +119,7 @@ public class Host implements Serializable {
 
     @Override
     public String toString() {
-        return "org.developers.monitor.monitor.persistence.Host[ hostId=" + hostId + " ]";
+        return "org.developers.monitor.persistence.Host[ hostId=" + hostId + " ]";
     }
     
 }
