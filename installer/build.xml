@@ -12,9 +12,8 @@
     <target name="server-install" depends="server-uninstall">
         <mkdir dir="${application_dir}" />
 
-        <unzip dest="${application_dir}">
-            <file name="server-src/tomcat-8.0.14.zip" />
-        </unzip>
+        <unzip src="server-src/tomcat-8.0.14.zip" dest="${application_dir}" />
+
         <move file="${application_dir}/apache-tomcat-8.0.14" tofile="${application_dir}/tomcat"/>
         <chmod dir="${application_dir}/tomcat/bin" perm="+x" includes="*.sh"/>
 

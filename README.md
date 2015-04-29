@@ -12,6 +12,8 @@
 
 `ant install` (ant)
 
+ant version >= 1.8.2
+
 * `install.properties` - plik konfiguracyjny, można w nim ustawić: 
 
 `app_dir` - katalog , gdzie ma zostać wypakowany serwer aplikacyjny wraz z aplikacją (domyślnie: "/monitor-back")
