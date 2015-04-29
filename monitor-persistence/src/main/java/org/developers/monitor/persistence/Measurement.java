@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.developers.monitor.monitor.persistence;
+package org.developers.monitor.persistence;
 
 import java.io.Serializable;
 import java.util.Date;

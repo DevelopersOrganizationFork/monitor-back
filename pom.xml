@@ -10,6 +10,7 @@
     <modules>
         <module>monitor-app</module>
         <module>installer</module>
+        <module>monitor-persistence</module>
   </modules>
     
     <properties>
