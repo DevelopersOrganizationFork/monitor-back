@@ -29,7 +29,7 @@ public abstract class Dao<K, E> implements IDao<K, E> {
     }
  
     @Override
-    public E persist(E entity) throws Exception { 
+    public E persist(E entity) { 
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
@@ -37,12 +37,16 @@ public abstract class Dao<K, E> implements IDao<K, E> {
     }
  
     @Override
-    public void remove(E entity) throws Exception { 
-        entityManager.remove(entity); 
+    public void remove(E entity) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(entity);
+        entityManager.getTransaction().commit();
     }
  
     @Override
-    public E findById(K id) throws Exception { 
-        return entityManager.find(entityClass, id); 
+    public E findById(K id) {
+        entityManager.getTransaction().begin();
+        E entity = entityManager.find(entityClass, id); 
+        return entity;
     }
 }

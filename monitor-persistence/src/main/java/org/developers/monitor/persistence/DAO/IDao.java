@@ -10,7 +10,7 @@ package org.developers.monitor.persistence.DAO;
  * @author Tomek
  */
 public interface IDao<K, E> {
-    E persist(E entity) throws Exception;
-    void remove(E entity) throws Exception;
-    E findById(K id) throws Exception;
+    E persist(E entity);
+    void remove(E entity);
+    E findById(K id);
 }
