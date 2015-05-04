@@ -31,3 +31,11 @@ ant version >= 1.8.2
 ###Po uruchomieniu serwera należy sprawdzić czy aplikacja odpowiada prawidłowo:
 `http://localhost:18080/monitor-back/rest/hello`
 
+###Adresy webservisów
+http://localhost:18080/monitor-back/hosts/2/measurements/CPU/3
+http://localhost:18080/monitor-back/hosts/2/measurements/CPU
+http://localhost:18080/monitor-back/hosts/2/measurements
+http://localhost:18080/monitor-back/hosts/2
+http://localhost:18080/monitor-back/hosts/2
+
+
