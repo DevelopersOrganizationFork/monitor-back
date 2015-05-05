@@ -13,8 +13,10 @@
         <mkdir dir="${application_dir}" />
 
         <unzip src="server-src/tomcat-8.0.14.zip" dest="${application_dir}" />
+		<unzip src="server-src/apache-activemq-5.9.0-bin.zip" dest="${application_dir}" />
 
         <move file="${application_dir}/apache-tomcat-8.0.14" tofile="${application_dir}/tomcat"/>
+        <move file="${application_dir}/apache-activemq-5.9.0" tofile="${application_dir}/activemq"/>
         <chmod dir="${application_dir}/tomcat/bin" perm="+x" includes="*.sh"/>
 
         <copy file="server/tomcat/bin/catalina.bat" tofile="${application_dir}/tomcat/bin/catalina.bat" >
@@ -34,6 +36,7 @@
         </copy>
         <copy file="server/start.bat" todir="${application_dir}"/>
         <copy file="server/debug.bat" todir="${application_dir}"/>
+        <copy file="server/activemq/activeMQstart.bat" todir="${application_dir}"/>
     </target>
     
     <target name="deploy-app">
