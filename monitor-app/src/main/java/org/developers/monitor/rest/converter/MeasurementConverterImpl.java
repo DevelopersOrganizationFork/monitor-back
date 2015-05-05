@@ -8,10 +8,13 @@ import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.persistence.Memory;
 import org.developers.monitor.persistence.Network;
 import org.developers.monitor.rest.dto.MeasurementDTO;
+import org.developers.monitor.rest.dto.MeasurementDTO.Type;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.developers.monitor.rest.dto.MeasurementDTO.Type.CPU;
 
 /**
  * Created by reynev on 5/4/15.
@@ -49,13 +52,28 @@ public class MeasurementConverterImpl implements MeasurementConverter {
     }
 
     @Override
-    public MeasurementDTO convertToDTO(Measurement measurement, MeasurementDTO.Type measurementType) {
-        return null;
+    public MeasurementDTO convertToDTO(Measurement measurement, Type measurementType) {
+        MeasurementDTO measurementDTO = new MeasurementDTO();
+        switch (measurementType){
+            case CPU:
+                measurementDTO = convertCPU(measurement);
+                break;
+            case MEMORY:
+                measurementDTO = convertMemory(measurement);
+                break;
+            case NETWORKDOWN:
+                measurementDTO = convertNetworkDown(measurement);
+                break;
+            case NETWORKUP:
+                measurementDTO = convertNetworkUp(measurement);
+                break;
+        }
+        return measurementDTO;
     }
 
     private MeasurementDTO convertNetworkUp(Measurement measurement) {
         MeasurementDTO measurementDTO = convertBasicData(measurement);
-        measurementDTO.type = MeasurementDTO.Type.NETWORKUP;
+        measurementDTO.type = Type.NETWORKUP;
         measurementDTO.value = computeNetworkUpValue(measurement);
         return measurementDTO;
     }
@@ -69,7 +87,7 @@ public class MeasurementConverterImpl implements MeasurementConverter {
 
     private MeasurementDTO convertNetworkDown(Measurement measurement) {
         MeasurementDTO measurementDTO = convertBasicData(measurement);
-        measurementDTO.type = MeasurementDTO.Type.NETWORKDOWN;
+        measurementDTO.type = Type.NETWORKDOWN;
         measurementDTO.value = computeNetworkDownValue(measurement);
         return measurementDTO;
     }
@@ -83,7 +101,7 @@ public class MeasurementConverterImpl implements MeasurementConverter {
 
     private MeasurementDTO convertMemory(Measurement measurement) {
         MeasurementDTO measurementDTO = convertBasicData(measurement);
-        measurementDTO.type = MeasurementDTO.Type.MEMORY;
+        measurementDTO.type = Type.MEMORY;
         measurementDTO.value = computeMemoryValue(measurement);
         return measurementDTO;
     }
@@ -99,7 +117,7 @@ public class MeasurementConverterImpl implements MeasurementConverter {
 
     private MeasurementDTO convertCPU(Measurement measurement) {
         MeasurementDTO measurementDTO = convertBasicData(measurement);
-        measurementDTO.type = MeasurementDTO.Type.CPU;
+        measurementDTO.type = CPU;
         measurementDTO.value = computeCPUValue(measurement);
         return measurementDTO;
     }
