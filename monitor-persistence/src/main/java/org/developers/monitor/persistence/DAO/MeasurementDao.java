@@ -7,10 +7,18 @@ package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Measurement;
 
+import java.util.List;
+
 /**
  *
  * @author Tomek
  */
 public class MeasurementDao extends Dao<Integer, Measurement> {
-    
+
+
+    public List<Measurement> findByHostId(Integer id) {
+        return null;
+    }
+
+
 }
