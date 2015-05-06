@@ -41,18 +41,6 @@
             <version>5.9.0</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
     <build>
