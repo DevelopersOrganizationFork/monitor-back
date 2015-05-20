@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.developers.monitor.rest;
 
-import java.util.Iterator;
-import javax.jms.JMSException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.jms.TextMessage;
-import org.developers.monitor.rest.dto.SensorData;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.developers.sensor.jms.consumer.JMSConnection;
-import org.primefaces.json.JSONException;
-import org.primefaces.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,15 +23,15 @@ public class SensorDataController {
     private JMSConnection jmsConnnection = new JMSConnection();
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public SensorData getSensorData() throws JMSException, JSONException {
-        TextMessage message = jmsConnnection.getMessage();
-        JSONObject json = new JSONObject(message.getText());
-        System.out.println();
-        Iterator<?> keys = json.keys();
-        while (keys.hasNext()) {
-            String key = (String) keys.next();
-            System.out.println(key + " = " + json.get(key));
+    public List<JsonNode> getSensorData() throws Exception {
+        List<JsonNode> result = new ArrayList<>();
+        for (int i=0; i<10; i++) {
+            TextMessage message = jmsConnnection.getMessage();
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode actualObj = mapper.readTree(message.getText());
+            System.out.println(actualObj.toString());
+            result.add(actualObj);
         }
-        return new SensorData("It is like it is.");
+        return result;
     }
 }

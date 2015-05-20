@@ -8,15 +8,17 @@ import java.util.Date;
  * Created by sebastian.alberski on 2015-05-04.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Measurement {
+public class MeasurementDTO {
     public enum Type {
         CPU,
         MEMORY,
-        NETWORK
+        NETWORKUP,
+        NETWORKDOWN
     }
     
     public Date date;
     public Type type;
-    public int value;
+    public double value;
+    public int id;
   
 }
