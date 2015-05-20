@@ -47,6 +47,8 @@ public abstract class Dao<K, E> implements IDao<K, E> {
     public E findById(K id) {
         entityManager.getTransaction().begin();
         E entity = entityManager.find(entityClass, id); 
+        entityManager.getTransaction().commit();
         return entity;
+        
     }
 }
