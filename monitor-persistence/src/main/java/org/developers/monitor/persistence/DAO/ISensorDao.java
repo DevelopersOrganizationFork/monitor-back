@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Tomek
  */
-@Repository
 public interface ISensorDao extends IDao<Integer, Sensor> {
     
 }

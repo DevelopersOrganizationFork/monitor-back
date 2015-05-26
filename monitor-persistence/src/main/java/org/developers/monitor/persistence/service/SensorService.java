@@ -7,17 +7,18 @@ package org.developers.monitor.persistence.service;
 
 import org.developers.monitor.persistence.DAO.SensorDao;
 import org.developers.monitor.persistence.Sensor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Tomek
  */
+@Component
 public class SensorService {
-    private static SensorDao sensorDao;
     
-    public SensorService(){
-        sensorDao = new SensorDao();
-    }
+    @Autowired
+    private SensorDao sensorDao;
     
     public Sensor persist(Sensor entity) throws Exception {
        return sensorDao.persist(entity);

@@ -13,27 +13,34 @@ import org.developers.monitor.persistence.DAO.MemoryDao;
 import org.developers.monitor.persistence.DAO.NetworkDao;
 import org.developers.monitor.persistence.DAO.SensorDao;
 import org.developers.monitor.persistence.Measurement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Tomek
  */
+@Component
 public class UniversalService {
-    private static HostDao hostDao;
-    private static CpuDao cpuDao;
-    private static DiskDao diskDao;
-    private static NetworkDao networkDao;
-    private static MemoryDao memoryDao;
-    private static MeasurementDao measurementDao;
     
-    public UniversalService(){
-        hostDao = new HostDao();
-        cpuDao = new CpuDao();
-        diskDao = new DiskDao();
-        networkDao = new NetworkDao();
-        memoryDao = new MemoryDao();
-        measurementDao = new MeasurementDao();
-    }
+    @Autowired
+    private HostDao hostDao;
+    
+    @Autowired
+    private CpuDao cpuDao;
+    
+    @Autowired
+    private DiskDao diskDao;
+    
+    @Autowired
+    private NetworkDao networkDao;
+    
+    @Autowired
+    private MemoryDao memoryDao;
+    
+    @Autowired
+    private MeasurementDao measurementDao;
+    
     
     public void insertMeasurementData(MeasurementData measurementData)
     {
@@ -44,12 +51,10 @@ public class UniversalService {
             memoryDao.persist(measurementData.memory);
             networkDao.persist(measurementData.network);
             
-            
             Measurement measurement = new Measurement();
             measurement.setMeasurementDate(null);
-        }
-        catch(Exception e)
-        {
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
        
