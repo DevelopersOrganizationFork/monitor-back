@@ -6,6 +6,7 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Measurement;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author Tomek
  */
+@Repository
 public class MeasurementDao extends Dao<Integer, Measurement> {
 
 

@@ -6,11 +6,13 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Disk;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tomek
  */
+@Repository
 public class DiskDao extends Dao<Integer, Disk> {
     
 }

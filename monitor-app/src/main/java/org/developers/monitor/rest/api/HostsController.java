@@ -3,13 +3,11 @@ package org.developers.monitor.rest.api;
 import org.developers.monitor.rest.dto.Host;
 import org.developers.monitor.rest.support.RestConfig;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -20,20 +18,22 @@ import java.util.List;
 public class HostsController {
     
     private List<Host> fakeHosts = Arrays.asList(
-            new Host() {{name="0"; href="/hosts/0";}},
-            new Host() {{name="1"; href="/hosts/1";}},
-            new Host() {{name="2"; href="/hosts/2";}},
-            new Host() {{name="3"; href="/hosts/3";}},
-            new Host() {{name="4"; href="/hosts/4";}}
+            new Host() {{name="hostname0"; href="/hosts/hostname0";}},
+            new Host() {{name="hostname1"; href="/hosts/hostname1";}},
+            new Host() {{name="hostname2"; href="/hosts/hostname2";}},
+            new Host() {{name="hostname3"; href="/hosts/hostname3";}},
+            new Host() {{name="hostname4"; href="/hosts/hostname4";}}
         );
 
-    @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<Host> getHosts() {
-        return fakeHosts;
-    }
-    
     @RequestMapping(value = "/{hostid}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}) 
     public Host getHost(@PathVariable("hostid") int hostid){
         return fakeHosts.get(hostid);        
+    }
+    
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<Host> getHostByName(@RequestParam(value = "name", required = false) String name){
+        return name!=null && !name.isEmpty() 
+                ? fakeHosts.stream().filter(h -> h.name.contains(name)).collect(Collectors.toList())
+                : fakeHosts;
     }
 }

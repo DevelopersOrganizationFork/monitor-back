@@ -2,7 +2,6 @@ package org.developers.monitor.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.jms.TextMessage;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,9 +25,8 @@ public class SensorDataController {
     public List<JsonNode> getSensorData() throws Exception {
         List<JsonNode> result = new ArrayList<>();
         for (int i=0; i<10; i++) {
-            TextMessage message = jmsConnnection.getMessage();
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode actualObj = mapper.readTree(message.getText());
+            JsonNode actualObj = mapper.readTree(jmsConnnection.getMessage());
             System.out.println(actualObj.toString());
             result.add(actualObj);
         }

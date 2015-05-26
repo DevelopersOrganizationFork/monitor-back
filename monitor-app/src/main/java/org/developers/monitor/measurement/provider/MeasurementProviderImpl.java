@@ -6,6 +6,7 @@ import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.rest.dto.MeasurementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +16,12 @@ import java.util.List;
  */
 @Component
 public class MeasurementProviderImpl implements MeasurementProvider {
-
+   
     @Autowired
     private MeasurementConverter measurementConverter;
-
+    
+    @Autowired
     private MeasurementDao measurementDao;
-
-    public MeasurementProviderImpl() {
-        measurementDao = new MeasurementDao();
-    }
 
     @Override
     public List<MeasurementDTO> getAllMeasurements(int hostId) {

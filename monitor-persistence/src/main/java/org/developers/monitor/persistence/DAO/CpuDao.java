@@ -6,11 +6,13 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Cpu;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tomek
  */
+@Repository
 public class CpuDao extends Dao<Integer, Cpu> {
      
 }

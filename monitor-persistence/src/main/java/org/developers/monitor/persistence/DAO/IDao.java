@@ -5,10 +5,13 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author Tomek
  */
+@Transactional
 public interface IDao<K, E> {
     E persist(E entity);
     void remove(E entity);

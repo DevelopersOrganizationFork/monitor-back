@@ -35,6 +35,6 @@ public class MeasurementController {
     public MeasurementDTO getHost(@PathVariable("measurementid") int measurementId,
                                @PathVariable(value = "type") MeasurementDTO.Type measuremenType){
         return measurementProvider.getMeasurementByTypeAndId(measuremenType, measurementId);
-    }
+    }  
 
 }

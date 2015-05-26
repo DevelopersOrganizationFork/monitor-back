@@ -6,11 +6,13 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Sensor;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tomek
  */
+@Repository
 public interface ISensorDao extends IDao<Integer, Sensor> {
     
 }

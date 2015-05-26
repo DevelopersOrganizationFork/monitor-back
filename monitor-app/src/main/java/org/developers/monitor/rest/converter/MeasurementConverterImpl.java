@@ -9,7 +9,9 @@ import org.developers.monitor.persistence.Memory;
 import org.developers.monitor.persistence.Network;
 import org.developers.monitor.rest.dto.MeasurementDTO;
 import org.developers.monitor.rest.dto.MeasurementDTO.Type;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +21,17 @@ import static org.developers.monitor.rest.dto.MeasurementDTO.Type.CPU;
 /**
  * Created by reynev on 5/4/15.
  */
-@Component
+@Service
 public class MeasurementConverterImpl implements MeasurementConverter {
 
+    @Autowired
     private NetworkDao networkDao;
-
+    
+    @Autowired
     private CpuDao cpuDao;
-
+    
+    @Autowired
     private MemoryDao memoryDao;
-
-    public MeasurementConverterImpl(){
-        networkDao = new NetworkDao();
-        cpuDao = new CpuDao();
-        memoryDao = new MemoryDao();
-    }
 
     @Override
     public List<MeasurementDTO> convertToDTO(Measurement measurement) {

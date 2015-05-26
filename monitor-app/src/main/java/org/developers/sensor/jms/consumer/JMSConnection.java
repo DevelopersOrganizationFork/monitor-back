@@ -14,6 +14,8 @@ import org.developers.sensor.configuration.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 public class JMSConnection {
 
     private static final Logger logger = LoggerFactory
@@ -55,15 +57,9 @@ public class JMSConnection {
 
     }
 
-    public TextMessage getMessage() throws JMSException {
+    public String getMessage() throws JMSException {
         Message msg = consumer.receive(1000);
-        if (msg instanceof TextMessage) {
-            TextMessage textMessage = (TextMessage) msg;
-            return textMessage;
-        } else {
-            return null;
-        }
-
+        return msg != null ? ((TextMessage)msg).getText() : "{}";
     }
 
     public void reconnect() {

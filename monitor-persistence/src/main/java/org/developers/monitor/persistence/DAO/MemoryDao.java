@@ -6,11 +6,13 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Memory;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tomek
  */
+@Repository
 public class MemoryDao extends Dao<Integer, Memory> {
     
 }
