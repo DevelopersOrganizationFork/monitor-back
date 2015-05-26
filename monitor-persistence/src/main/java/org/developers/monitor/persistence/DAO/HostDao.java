@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author Tomek
  */
 @Repository
-public class HostDao extends Dao<Integer, Host> {
+public class HostDao extends Dao<String, Host> {
     
 }

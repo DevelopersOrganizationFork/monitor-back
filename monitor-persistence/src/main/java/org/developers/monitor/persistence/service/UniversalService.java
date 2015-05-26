@@ -18,6 +18,7 @@ import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.developers.monitor.persistence.Host;
 
 /**
  *
@@ -45,11 +46,19 @@ public class UniversalService {
     private MeasurementDao measurementDao;
     
     
-    public void insertMeasurementData(MeasurementData measurementData)
+    public Integer insertMeasurementData(MeasurementData measurementData)
     {
         try{
-            /*
-            Integer hostId = hostDao.persist(measurementData.host).getHostId();
+            Host host = hostDao.findById(measurementData.host.getHostId());
+            
+            String hostId;
+            if(host != null && host.getHostId() != null && !host.getHostId().isEmpty()){
+                hostId = host.getHostId();
+            }
+            else{
+                hostId = hostDao.persist(measurementData.host).getHostId();
+            }
+            
             Integer cpuId = cpuDao.persist(measurementData.cpu).getCPUId();
             Integer diskId = diskDao.persist(measurementData.disk).getDiskID();
             Integer memoryId = memoryDao.persist(measurementData.memory).getMemoryId();
@@ -62,14 +71,15 @@ public class UniversalService {
             measurementPK.setNetworknetworkId(networkId);
             
             Measurement measurement = new Measurement();
+            measurement.setHosthostId(hostId);
             measurement.setMeasurementDate(new Date());
             measurement.setMeasurementPK(measurementPK);
             
-            measurementDao.persist(measurement);
-            */
+            return measurementDao.persist(measurement).getMeasurementPK().getMeasurementId();
             
         } catch(Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
        
