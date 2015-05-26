@@ -45,6 +45,7 @@ public class UniversalService {
     public void insertMeasurementData(MeasurementData measurementData)
     {
         try{
+            /*
             hostDao.persist(measurementData.host);
             cpuDao.persist(measurementData.cpu);
             diskDao.persist(measurementData.disk);
@@ -53,6 +54,7 @@ public class UniversalService {
             
             Measurement measurement = new Measurement();
             measurement.setMeasurementDate(null);
+            */
         } catch(Exception e) {
             e.printStackTrace();
         }
