@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Measurement.findByNetworknetworkId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.networknetworkId = :networknetworkId"),
     @NamedQuery(name = "Measurement.findByDiskdiskID", query = "SELECT m FROM Measurement m WHERE m.measurementPK.diskdiskID = :diskdiskID"),
     @NamedQuery(name = "Measurement.findByCPUCPUId", query = "SELECT m FROM Measurement m WHERE m.measurementPK.cPUCPUId = :cPUCPUId"),
-    @NamedQuery(name = "Measurement.findBySensorsensorId", query = "SELECT m FROM Measurement m WHERE m.sensorsensorId = :sensorsensorId"),
+    @NamedQuery(name = "Measurement.findByHosthostId", query = "SELECT m FROM Measurement m WHERE m.hosthostId = :hosthostId"),
     @NamedQuery(name = "Measurement.findByMeasurementDate", query = "SELECT m FROM Measurement m WHERE m.measurementDate = :measurementDate")})
 public class Measurement implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,8 +42,9 @@ public class Measurement implements Serializable {
     protected org.developers.monitor.persistence.MeasurementPK measurementPK;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Sensor_sensorId")
-    private int sensorsensorId;
+    @Size(min = 1, max = 50)
+    @Column(name = "Host_hostId")
+    private String hosthostId;
     @Column(name = "measurementDate")
     @Temporal(TemporalType.DATE)
     private Date measurementDate;
@@ -54,9 +56,9 @@ public class Measurement implements Serializable {
         this.measurementPK = measurementPK;
     }
 
-    public Measurement(org.developers.monitor.persistence.MeasurementPK measurementPK, int sensorsensorId) {
+    public Measurement(org.developers.monitor.persistence.MeasurementPK measurementPK, String hosthostId) {
         this.measurementPK = measurementPK;
-        this.sensorsensorId = sensorsensorId;
+        this.hosthostId = hosthostId;
     }
 
     public Measurement(int measurementId, int memorymemoryId, int networknetworkId, int diskdiskID, int cPUCPUId) {
@@ -71,12 +73,12 @@ public class Measurement implements Serializable {
         this.measurementPK = measurementPK;
     }
 
-    public int getSensorsensorId() {
-        return sensorsensorId;
+    public String getHosthostId() {
+        return hosthostId;
     }
 
-    public void setSensorsensorId(int sensorsensorId) {
-        this.sensorsensorId = sensorsensorId;
+    public void setHosthostId(String hosthostId) {
+        this.hosthostId = hosthostId;
     }
 
     public Date getMeasurementDate() {

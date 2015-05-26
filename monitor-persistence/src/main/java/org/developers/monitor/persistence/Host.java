@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,20 +27,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Host.findAll", query = "SELECT h FROM Host h"),
     @NamedQuery(name = "Host.findByHostId", query = "SELECT h FROM Host h WHERE h.hostId = :hostId"),
-    @NamedQuery(name = "Host.findBySensorsensorId", query = "SELECT h FROM Host h WHERE h.sensorsensorId = :sensorsensorId"),
     @NamedQuery(name = "Host.findByHostName", query = "SELECT h FROM Host h WHERE h.hostName = :hostName"),
     @NamedQuery(name = "Host.findByHostIP", query = "SELECT h FROM Host h WHERE h.hostIP = :hostIP")})
 public class Host implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "hostId")
-    private Integer hostId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Sensor_sensorId")
-    private int sensorsensorId;
+    @Size(min = 1, max = 50)
+    @Column(name = "hostId")
+    private String hostId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -55,30 +49,21 @@ public class Host implements Serializable {
     public Host() {
     }
 
-    public Host(Integer hostId) {
+    public Host(String hostId) {
         this.hostId = hostId;
     }
 
-    public Host(Integer hostId, int sensorsensorId, String hostName) {
+    public Host(String hostId, String hostName) {
         this.hostId = hostId;
-        this.sensorsensorId = sensorsensorId;
         this.hostName = hostName;
     }
 
-    public Integer getHostId() {
+    public String getHostId() {
         return hostId;
     }
 
-    public void setHostId(Integer hostId) {
+    public void setHostId(String hostId) {
         this.hostId = hostId;
-    }
-
-    public int getSensorsensorId() {
-        return sensorsensorId;
-    }
-
-    public void setSensorsensorId(int sensorsensorId) {
-        this.sensorsensorId = sensorsensorId;
     }
 
     public String getHostName() {

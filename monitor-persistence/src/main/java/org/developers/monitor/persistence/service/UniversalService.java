@@ -11,7 +11,6 @@ import org.developers.monitor.persistence.DAO.HostDao;
 import org.developers.monitor.persistence.DAO.MeasurementDao;
 import org.developers.monitor.persistence.DAO.MemoryDao;
 import org.developers.monitor.persistence.DAO.NetworkDao;
-import org.developers.monitor.persistence.DAO.SensorDao;
 import org.developers.monitor.persistence.Measurement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
