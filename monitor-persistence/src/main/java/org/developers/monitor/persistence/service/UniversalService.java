@@ -5,6 +5,9 @@
  */
 package org.developers.monitor.persistence.service;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import org.developers.monitor.persistence.DAO.CpuDao;
 import org.developers.monitor.persistence.DAO.DiskDao;
 import org.developers.monitor.persistence.DAO.HostDao;
@@ -12,6 +15,7 @@ import org.developers.monitor.persistence.DAO.MeasurementDao;
 import org.developers.monitor.persistence.DAO.MemoryDao;
 import org.developers.monitor.persistence.DAO.NetworkDao;
 import org.developers.monitor.persistence.Measurement;
+import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,15 +49,25 @@ public class UniversalService {
     {
         try{
             /*
-            hostDao.persist(measurementData.host);
-            cpuDao.persist(measurementData.cpu);
-            diskDao.persist(measurementData.disk);
-            memoryDao.persist(measurementData.memory);
-            networkDao.persist(measurementData.network);
+            Integer hostId = hostDao.persist(measurementData.host).getHostId();
+            Integer cpuId = cpuDao.persist(measurementData.cpu).getCPUId();
+            Integer diskId = diskDao.persist(measurementData.disk).getDiskID();
+            Integer memoryId = memoryDao.persist(measurementData.memory).getMemoryId();
+            Integer networkId = networkDao.persist(measurementData.network).getNetworkId();
+            
+            MeasurementPK measurementPK = new MeasurementPK();
+            measurementPK.setCPUCPUId(cpuId);
+            measurementPK.setDiskdiskID(diskId);
+            measurementPK.setMemorymemoryId(memoryId);
+            measurementPK.setNetworknetworkId(networkId);
             
             Measurement measurement = new Measurement();
-            measurement.setMeasurementDate(null);
+            measurement.setMeasurementDate(new Date());
+            measurement.setMeasurementPK(measurementPK);
+            
+            measurementDao.persist(measurement);
             */
+            
         } catch(Exception e) {
             e.printStackTrace();
         }
