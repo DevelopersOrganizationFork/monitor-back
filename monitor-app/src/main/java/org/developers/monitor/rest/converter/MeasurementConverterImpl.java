@@ -24,13 +24,13 @@ import static org.developers.monitor.rest.dto.MeasurementDTO.Type.CPU;
 @Service
 public class MeasurementConverterImpl implements MeasurementConverter {
 
-    @Autowired
+    //@Autowired
     private NetworkDao networkDao;
     
-    @Autowired
+    //@Autowired
     private CpuDao cpuDao;
     
-    @Autowired
+    //@Autowired
     private MemoryDao memoryDao;
 
     @Override

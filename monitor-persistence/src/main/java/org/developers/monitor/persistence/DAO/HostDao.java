@@ -6,13 +6,13 @@
 package org.developers.monitor.persistence.DAO;
 
 import org.developers.monitor.persistence.Host;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Tomek
  */
-@Repository
+@Service
 public class HostDao extends Dao<String, Host> {
     
 }

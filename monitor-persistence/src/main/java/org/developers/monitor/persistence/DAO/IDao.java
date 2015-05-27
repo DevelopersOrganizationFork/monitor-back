@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Tomek
  */
-@Transactional
+//@Transactional
 public interface IDao<K, E> {
     E persist(E entity);
     void remove(E entity);

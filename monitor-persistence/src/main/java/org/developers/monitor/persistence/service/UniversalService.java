@@ -27,7 +27,7 @@ import org.developers.monitor.persistence.Host;
 @Component
 public class UniversalService {
     
-    @Autowired
+    /*@Autowired
     private HostDao hostDao;
     
     @Autowired
@@ -81,7 +81,7 @@ public class UniversalService {
             e.printStackTrace();
             return -1;
         }
-    }
+    }*/
        
     
 }
