@@ -19,15 +19,16 @@ import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.developers.monitor.persistence.Host;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Tomek
  */
-@Component
+@Service
 public class UniversalService {
     
-    /*@Autowired
+    @Autowired
     private HostDao hostDao;
     
     @Autowired
@@ -81,7 +82,7 @@ public class UniversalService {
             e.printStackTrace();
             return -1;
         }
-    }*/
+    }
        
     
 }
