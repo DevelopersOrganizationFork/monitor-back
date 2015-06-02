@@ -14,7 +14,6 @@ import org.developers.sensor.configuration.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 
 public class JMSConnection {
 
