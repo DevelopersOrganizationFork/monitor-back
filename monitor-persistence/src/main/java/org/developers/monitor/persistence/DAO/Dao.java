@@ -48,7 +48,6 @@ public abstract class Dao<K, E> implements IDao<K, E> {
         entityManager.getTransaction().begin();
         E entity = entityManager.find(entityClass, id); 
         entityManager.getTransaction().commit();
-        //TODO - nie zamykamy tej transakcji?
         return entity;
         
     }
