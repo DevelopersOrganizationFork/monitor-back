@@ -23,8 +23,6 @@ import org.developers.monitor.persistence.Users;
 import org.developers.monitor.persistence.service.exceptions.UserAlreadyExistException;
 import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -32,7 +30,6 @@ import org.slf4j.LoggerFactory;
  */
 @Service
 public class UniversalService {
-    private final Logger LOGGER = LoggerFactory.getLogger(UniversalService.class);
     
     @Autowired
     private HostDao hostDao;
@@ -110,7 +107,7 @@ public class UniversalService {
             return measurementDao.persist(measurement).getMeasurementPK().getMeasurementId();
             
         } catch(Exception ex) {
-            LOGGER.debug(ex.getMessage());
+            ex.printStackTrace();
             return -1;
         }
     }
