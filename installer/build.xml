@@ -38,13 +38,38 @@
         <copy file="server/debug.bat" todir="${application_dir}"/>
         <copy file="server/activemq/activeMQstart.bat" todir="${application_dir}"/>
     </target>
-    
+
     <target name="deploy-app">
         <unwar dest="${application_war_dir}">
             <fileset file="../monitor-app/target/*.war"/>
         </unwar>    
     </target>
+		<target name="install-app">
+        <delete dir="${application_dir}/tomcat" />
 
+        <unzip src="server-src/tomcat-8.0.14.zip" dest="${application_dir}" />
+		
+        <move file="${application_dir}/apache-tomcat-8.0.14" tofile="${application_dir}/tomcat"/>
+        <chmod dir="${application_dir}/tomcat/bin" perm="+x" includes="*.sh"/>
+
+        <copy file="server/tomcat/bin/catalina.bat" tofile="${application_dir}/tomcat/bin/catalina.bat" >
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <copy file="server/tomcat/bin/catalina.sh" tofile="${application_dir}/tomcat/bin/catalina.sh" >
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <copy file="server/tomcat/conf/server.xml" tofile="${application_dir}/tomcat/conf/server.xml" >
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+    </target>
+    <target name="install-tomcat" depends="install-app,
+											deploy-app" />
     <target name="install" depends="server-install,
                                     deploy-app"/>
 </project>

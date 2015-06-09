@@ -33,12 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/sensordata")
 public class SensorDataController {
     private static final String  NUMBER_OF_ITEMS = "NumberOfItems";
-    private MeasurementData measurementData = null;
-    private Host host = new Host();
-    private Memory memory = new Memory();
-    private Cpu cpu = new Cpu();
-    private Disk disk = new Disk();
-    private Network network = new Network();
     @Autowired
     private UniversalService universalService;
     private final JMSConnection jmsConnnection = new JMSConnection();
@@ -59,13 +53,20 @@ public class SensorDataController {
 
     @Scheduled(fixedRate = 15000) // 15s
     public void getDataFromMq() throws IOException, JMSException{
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
+            Host host = new Host();
+            Memory memory = new Memory();
+            Cpu cpu = new Cpu();
+            Disk disk = new Disk();
+            Network network = new Network();
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jmsConnnection.getMessage());
             
             JsonNode hostNode = root.path("host");
-            host.setHostName(hostNode.path("hostname").asText());
+            String hostname = hostNode.path("hostname").asText();
+            host.setHostName(hostname);
             host.setHostIP(hostNode.path("ip").asText());
+            host.setHostId(hostname); // Co powinno byc wrzucane jako ID ?
             
             JsonNode measurNode = root.path("measurement").path("mem");
             memory.setMemoryRAM(measurNode.path("ram").asInt());
