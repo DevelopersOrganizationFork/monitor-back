@@ -9,6 +9,7 @@
     <class>org.developers.monitor.persistence.Measurement</class>
     <class>org.developers.monitor.persistence.Network</class>
     <class>org.developers.monitor.persistence.Users</class>
+    <class>org.developers.monitor.persistence.ComplexMeasurement</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/monitordb?zeroDateTimeBehavior=convertToNull"/>

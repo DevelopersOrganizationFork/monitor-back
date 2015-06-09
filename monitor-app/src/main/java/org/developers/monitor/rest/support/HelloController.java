@@ -3,6 +3,7 @@ package org.developers.monitor.rest.support;
 import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.developers.monitor.persistence.ComplexMeasurement;
 import org.developers.monitor.persistence.Cpu;
 import org.developers.monitor.persistence.Disk;
 import org.developers.monitor.persistence.Host;
@@ -41,55 +42,16 @@ public class HelloController {
         /*
             --> Do usunięcia - wrzucone w celu pokazania, że działa i jak tego używac
         */
-        Host host = new Host();
-        host.setHostIP("83.80.12.1");
-        host.setHostName("Temporary");
-        host.setHostId("MAC:12:202:214:23");
+        ComplexMeasurement cm = new ComplexMeasurement();
+        cm.setMeasurementInterval(2);
+        cm.setMeasurementType("CPU");
+        cm.setTimeRange(16);
+        cm.setUnitType("SECOND");
+        cm.setUsersidUser(us.getAllUsers().get(0).getIdUser());
         
-        Network network = new Network();
-        network.setNetworkDownload(BigInteger.valueOf(500));
-        network.setNetworkIP("83.80.12.12");
-        network.setNetworkMAC("MAC:12:202:214:23");
-        network.setNetworkUpload(BigInteger.ZERO);
-        
-        Cpu cpu = new Cpu();
-        cpu.setCPUIdle(BigInteger.ZERO);
-        cpu.setCPUIrq(BigInteger.ZERO);
-        cpu.setCPUNice(BigInteger.ONE);
-        cpu.setCPUSoftIrq(BigInteger.ZERO);
-        cpu.setCPUStolen(BigInteger.ZERO);
-        cpu.setCPUSys(BigInteger.ZERO);
-        cpu.setCPUTotal(BigInteger.TEN);
-        cpu.setCPUUser(BigInteger.ZERO);
-        cpu.setCPUWait(BigInteger.ZERO);
-        
-        Disk disk = new Disk();
-        disk.setDiskRead(BigInteger.TEN);
-        disk.setDiskWrite(BigInteger.TEN);
-        
-        Memory memory = new Memory();
-        memory.setMemoryActualUsed(BigInteger.ZERO);
-        memory.setMemoryRAM(2048);
-        memory.setMemoryTotal(BigInteger.TEN);
-        memory.setMemoryUsed(BigInteger.ZERO);
-        
-        MeasurementData ms = new MeasurementData(host,cpu,disk,memory,network);
-        
-        Integer msid = us.insertMeasurementData(ms);
-        
-        
-        
-        
-        
-        Users user = new Users("testUser", "testUser");
-        Integer id = -1;
-        try {
-            id = us.insertUser(user);
-        } catch (UserAlreadyExistException ex) {
-            Logger.getLogger(HelloController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Integer cmid = us.insertComplexMeasurement(cm);
 
-        return new HelloMessage("Hello! Monitor is running! Dodalem measurement pod id: " + msid);
+        return new HelloMessage("Hello! Monitor is running! Dodalem ComplexMeasurement pod id: " + cmid);
     }
     
     

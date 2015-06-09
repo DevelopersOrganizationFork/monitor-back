@@ -8,6 +8,8 @@ package org.developers.monitor.persistence.service;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
+import org.developers.monitor.persistence.ComplexMeasurement;
+import org.developers.monitor.persistence.DAO.ComplexMeasurementDao;
 import org.developers.monitor.persistence.DAO.CpuDao;
 import org.developers.monitor.persistence.DAO.DiskDao;
 import org.developers.monitor.persistence.DAO.HostDao;
@@ -52,6 +54,14 @@ public class UniversalService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private ComplexMeasurementDao complexMeasurementDao;
+    
+    public Integer insertComplexMeasurement(ComplexMeasurement complexMeasurement)
+    {
+        return complexMeasurementDao.persist(complexMeasurement).getComplexMeasurementId();
+    }   
+    
     public Integer insertUser(Users user) throws UserAlreadyExistException {
         String userName = user.getUserName();
         if (!userDao.isUserNameAvailable(userName)) {
