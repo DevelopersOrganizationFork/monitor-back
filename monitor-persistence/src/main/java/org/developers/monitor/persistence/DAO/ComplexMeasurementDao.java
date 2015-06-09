@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.ComplexMeasurement;
 import org.springframework.stereotype.Service;
 
