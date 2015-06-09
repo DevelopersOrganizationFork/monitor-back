@@ -23,6 +23,8 @@ import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.developers.monitor.persistence.Host;
+import org.developers.monitor.persistence.Memory;
+import org.developers.monitor.persistence.Network;
 import org.developers.monitor.persistence.Users;
 import org.developers.monitor.persistence.service.exceptions.UserAlreadyExistException;
 import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
@@ -82,6 +84,21 @@ public class UniversalService {
     public List<Disk> getAllDisks()
     {
         return diskDao.getAllDisks();
+    }
+    
+    public List<Network> getAllNetworks()
+    {
+        return networkDao.getAllNetworks();
+    }
+    
+    public List<Memory> getAllMemory()
+    {
+        return memoryDao.getAllMemory();
+    }
+    
+    public List<Measurement> getAllMeasurements()
+    {
+        return measurementDao.getAllMeasurements();
     }
 
     public Integer insertUser(Users user) throws UserAlreadyExistException {

@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.Memory;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemoryDao extends Dao<Integer, Memory> {
-    
+    public List<Memory> getAllMemory()
+    {
+        return entityManager.createNamedQuery("Memory.findAll", Memory.class)
+            .getResultList();
+    }
 }

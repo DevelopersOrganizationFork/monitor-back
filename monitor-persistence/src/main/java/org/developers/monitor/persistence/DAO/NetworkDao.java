@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.Network;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NetworkDao extends Dao<Integer, Network> {
-    
+    public List<Network> getAllNetworks()
+    {
+        return entityManager.createNamedQuery("Network.findAll", Network.class)
+            .getResultList();
+    }
 }

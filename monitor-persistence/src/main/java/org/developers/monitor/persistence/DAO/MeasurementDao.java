@@ -21,6 +21,12 @@ public class MeasurementDao extends Dao<Integer, Measurement> {
     public List<Measurement> findByHostId(Integer id) {
         return null;
     }
+    
+    public List<Measurement> getAllMeasurements()
+    {
+        return entityManager.createNamedQuery("Measurement.findAll", Measurement.class)
+            .getResultList();
+    }
 
 
 }
