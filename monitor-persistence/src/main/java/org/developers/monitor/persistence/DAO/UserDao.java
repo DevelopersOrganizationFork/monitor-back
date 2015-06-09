@@ -6,6 +6,8 @@
 package org.developers.monitor.persistence.DAO;
 
 import java.util.List;
+
+import org.apache.tomcat.jni.User;
 import org.developers.monitor.persistence.Users;
 import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,17 @@ public class UserDao extends Dao<Integer, Users> {
         catch(Exception ex)
         {
             throw new UserNotFoundException(String.format("No user in database with id: [%s]", id));
+        }
+    }
+    
+    public Users getUserByUserName(String userName) throws UserNotFoundException {
+        try {
+            List<Users> users = entityManager.createNamedQuery("Users.findByUserName", Users.class)
+                    .setParameter("userName", userName)
+                    .getResultList();
+            return users.get(0);
+        } catch(Exception ex) {
+            throw new UserNotFoundException(String.format("No user in database with username: [%s]", userName));
         }
     }
 }

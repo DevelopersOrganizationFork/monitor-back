@@ -85,6 +85,10 @@ public class UniversalService {
         return userDao.getUserById(id);
     }
     
+    public Users getUserByUserName(String userName) throws UserNotFoundException {
+        return userDao.getUserByUserName(userName);
+    }
+    
     public Integer insertMeasurementData(MeasurementData measurementData)
     {
         try{
