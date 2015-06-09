@@ -5,15 +5,17 @@
     <class>org.developers.monitor.persistence.Memory</class>
     <class>org.developers.monitor.persistence.Disk</class>
     <class>org.developers.monitor.persistence.Host</class>
-    <class>org.developers.monitor.persistence.Network</class>
     <class>org.developers.monitor.persistence.Cpu</class>
     <class>org.developers.monitor.persistence.Measurement</class>
+    <class>org.developers.monitor.persistence.Network</class>
+    <class>org.developers.monitor.persistence.Users</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/monitordb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="monitordb"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="monitordb123"/>
+      <property name="javax.persistence.jdbc.timeout" value="20000"/>
     </properties>
   </persistence-unit>
 </persistence>

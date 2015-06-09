@@ -6,19 +6,22 @@
 package org.developers.monitor.persistence.service;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.logging.Level;
 import org.developers.monitor.persistence.DAO.CpuDao;
 import org.developers.monitor.persistence.DAO.DiskDao;
 import org.developers.monitor.persistence.DAO.HostDao;
 import org.developers.monitor.persistence.DAO.MeasurementDao;
 import org.developers.monitor.persistence.DAO.MemoryDao;
 import org.developers.monitor.persistence.DAO.NetworkDao;
+import org.developers.monitor.persistence.DAO.UserDao;
 import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.developers.monitor.persistence.Host;
+import org.developers.monitor.persistence.Users;
+import org.developers.monitor.persistence.service.exceptions.UserAlreadyExistException;
+import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -46,6 +49,31 @@ public class UniversalService {
     @Autowired
     private MeasurementDao measurementDao;
     
+    @Autowired
+    private UserDao userDao;
+
+    public Integer insertUser(Users user) throws UserAlreadyExistException {
+        String userName = user.getUserName();
+        if (!userDao.isUserNameAvailable(userName)) {
+            throw new UserAlreadyExistException(String.format("Username: [%s] already exist in database.", userName));
+        }
+
+        return userDao.persist(user).getIdUser();
+    }
+
+    public void removeUser(Users user)
+    {
+        userDao.remove(user);
+    }
+    
+    public List<Users> getAllUsers(){
+        return userDao.getAllUsers();
+    }
+    
+    public Users getUserById(Integer id) throws UserNotFoundException
+    {
+        return userDao.getUserById(id);
+    }
     
     public Integer insertMeasurementData(MeasurementData measurementData)
     {
@@ -78,8 +106,8 @@ public class UniversalService {
             
             return measurementDao.persist(measurement).getMeasurementPK().getMeasurementId();
             
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch(Exception ex) {
+            ex.printStackTrace();
             return -1;
         }
     }
