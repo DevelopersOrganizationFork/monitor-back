@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import org.developers.monitor.persistence.ComplexMeasurement;
+import org.developers.monitor.persistence.Cpu;
 import org.developers.monitor.persistence.DAO.ComplexMeasurementDao;
 import org.developers.monitor.persistence.DAO.CpuDao;
 import org.developers.monitor.persistence.DAO.DiskDao;
@@ -17,6 +18,7 @@ import org.developers.monitor.persistence.DAO.MeasurementDao;
 import org.developers.monitor.persistence.DAO.MemoryDao;
 import org.developers.monitor.persistence.DAO.NetworkDao;
 import org.developers.monitor.persistence.DAO.UserDao;
+import org.developers.monitor.persistence.Disk;
 import org.developers.monitor.persistence.Measurement;
 import org.developers.monitor.persistence.MeasurementPK;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,26 @@ public class UniversalService {
         return complexMeasurementDao.persist(complexMeasurement).getComplexMeasurementId();
     }   
     
+    public List<Host> getAllHosts()
+    {
+        return hostDao.getAllHosts();
+    }
+    
+    public List<ComplexMeasurement> getAllComplexMeasurements()
+    {
+        return complexMeasurementDao.getAllComplexMeasurements();
+    }
+    
+    public List<Cpu> getAllCpus()
+    {
+        return cpuDao.getAllCpus();
+    }
+    
+    public List<Disk> getAllDisks()
+    {
+        return diskDao.getAllDisks();
+    }
+
     public Integer insertUser(Users user) throws UserAlreadyExistException {
         String userName = user.getUserName();
         if (!userDao.isUserNameAvailable(userName)) {

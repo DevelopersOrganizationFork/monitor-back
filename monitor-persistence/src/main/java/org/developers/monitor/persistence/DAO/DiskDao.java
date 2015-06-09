@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.Disk;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DiskDao extends Dao<Integer, Disk> {
-    
+    public List<Disk> getAllDisks()
+    {
+        return entityManager.createNamedQuery("Disk.findAll", Disk.class)
+            .getResultList();
+    }
 }

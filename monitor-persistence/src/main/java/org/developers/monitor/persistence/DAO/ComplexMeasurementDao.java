@@ -14,5 +14,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ComplexMeasurementDao extends Dao<Integer, ComplexMeasurement>{
-    
+    public List<ComplexMeasurement> getAllComplexMeasurements()
+    {
+        return entityManager.createNamedQuery("ComplexMeasurement.findAll", ComplexMeasurement.class)
+            .getResultList();
+    }
 }

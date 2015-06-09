@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.Cpu;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CpuDao extends Dao<Integer, Cpu> {
-     
+    public List<Cpu> getAllCpus()
+    {
+        return entityManager.createNamedQuery("Cpu.findAll", Cpu.class)
+            .getResultList();
+    }
 }

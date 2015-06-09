@@ -5,6 +5,7 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import java.util.List;
 import org.developers.monitor.persistence.Host;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HostDao extends Dao<String, Host> {
-    
+ 
+    public List<Host> getAllHosts()
+    {
+        return entityManager.createNamedQuery("Host.findAll", Host.class)
+            .getResultList();
+    }
 }
