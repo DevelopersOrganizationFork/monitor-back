@@ -53,7 +53,7 @@ public class SensorDataController {
 
     @Scheduled(fixedRate = 15000) // 15s
     public void getDataFromMq() throws IOException, JMSException{
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numberOfItems; i++) {
             Host host = new Host();
             Memory memory = new Memory();
             Cpu cpu = new Cpu();
@@ -61,7 +61,11 @@ public class SensorDataController {
             Network network = new Network();
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jmsConnnection.getMessage());
-            
+            if(!root.has("host"))
+            {
+                System.out.println("There is no data in activeMQ!");
+                break;
+            }
             JsonNode hostNode = root.path("host");
             String hostname = hostNode.path("hostname").asText();
             host.setHostName(hostname);
