@@ -3,6 +3,7 @@ package org.developers.monitor.app.config.filter;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -26,6 +27,9 @@ public class SimpleCORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         
         chain.doFilter(req, resp);
+    
+//        HttpServletRequest request = (HttpServletRequest)req;
+//        request.getHeader()
     }
     
     @Override

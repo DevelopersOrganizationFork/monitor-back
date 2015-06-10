@@ -20,5 +20,7 @@ public class MeasurementDTO {
     public Type type;
     public double value;
     public int id;
+    public boolean isComplex = false;
+    public String hostId = "SYSTEM";
   
 }
