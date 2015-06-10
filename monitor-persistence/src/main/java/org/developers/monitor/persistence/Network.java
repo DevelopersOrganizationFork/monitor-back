@@ -43,7 +43,7 @@ public class Network implements Serializable {
     @Size(max = 25)
     @Column(name = "networkMAC")
     private String networkMAC;
-    @Size(max = 45)
+    @Size(max = 405)
     @Column(name = "networkIP")
     private String networkIP;
     @Column(name = "networkDownload")

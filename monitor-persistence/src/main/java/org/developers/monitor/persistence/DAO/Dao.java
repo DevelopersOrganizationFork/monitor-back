@@ -5,7 +5,11 @@
  */
 package org.developers.monitor.persistence.DAO;
 
+import org.developers.monitor.persistence.Users;
+import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
+
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

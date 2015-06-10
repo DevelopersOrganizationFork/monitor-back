@@ -7,6 +7,8 @@ package org.developers.monitor.persistence.DAO;
 
 import java.util.List;
 import org.developers.monitor.persistence.Host;
+import org.developers.monitor.persistence.Users;
+import org.developers.monitor.persistence.service.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,5 +22,25 @@ public class HostDao extends Dao<String, Host> {
     {
         return entityManager.createNamedQuery("Host.findAll", Host.class)
             .getResultList();
+    }
+    
+    public Host getHostByName(String hostName)
+    {
+        return entityManager.createNamedQuery("Host.findByHostName", Host.class)
+                .setParameter("hostName", hostName)
+                .getResultList()
+                .stream()
+                .findAny()
+                .orElse(new Host());
+    }
+    
+    public Host getHostById(int hostId)
+    {
+        return entityManager.createNamedQuery("Host.findByHostId", Host.class)
+                .setParameter("hostId", hostId)
+                .getResultList()
+                .stream()
+                .findAny()
+                .orElse(new Host());
     }
 }

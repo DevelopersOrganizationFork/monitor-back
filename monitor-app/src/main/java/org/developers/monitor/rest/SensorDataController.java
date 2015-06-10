@@ -29,30 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Silwest
  */
 @Component
-@RestController
-@RequestMapping("/rest/sensordata")
 public class SensorDataController {
     private static final String  NUMBER_OF_ITEMS = "NumberOfItems";
     @Autowired
     private UniversalService universalService;
-    private final JMSConnection jmsConnnection = new JMSConnection();
+    private  JMSConnection jmsConnnection ;//= new JMSConnection();
     final int numberOfItems = Integer.parseInt(ConfigLoader.properties.getProperty(NUMBER_OF_ITEMS));
 
     
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<JsonNode> getSensorData() throws Exception {
-        List<JsonNode> result = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode actualObj = mapper.readTree(jmsConnnection.getMessage());
-            System.out.println(actualObj.toString());
-            result.add(actualObj);
-        }
-        return result;
-    }
+//    @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public List<JsonNode> getSensorData() throws Exception {
+//        List<JsonNode> result = new ArrayList<>();
+//        for (int i=0; i<10; i++) {
+//            ObjectMapper mapper = new ObjectMapper();
+//            JsonNode actualObj = mapper.readTree(jmsConnnection.getMessage());
+//            System.out.println(actualObj.toString());
+//            result.add(actualObj);
+//        }
+//        return result;
+//    }
 
     @Scheduled(fixedRate = 15000) // 15s
     public void getDataFromMq() throws IOException, JMSException{
+        jmsConnnection = new JMSConnection();
         for (int i = 0; i < numberOfItems; i++) {
             Host host = new Host();
             Memory memory = new Memory();
