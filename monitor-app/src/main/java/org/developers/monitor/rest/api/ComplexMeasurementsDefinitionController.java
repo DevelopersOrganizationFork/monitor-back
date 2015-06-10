@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by reynev on 6/10/15.
  */
@@ -25,9 +27,9 @@ public class ComplexMeasurementsDefinitionController {
         return complexMeasurementsDefinitionManager.getComplexMeasurementById(measurementId);
     }*/
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ComplexMeasurementDefinitionDTO getComplexMeasurements(@PathVariable(value = "hostid") String hostId) {
-        return complexMeasurementsDefinitionManager.getComplexMeasurementByHost(hostId);
+    @RequestMapping(value = "/complex", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<ComplexMeasurementDefinitionDTO> getComplexMeasurements(@PathVariable(value = "hostid") String hostId) {
+        return complexMeasurementsDefinitionManager.getComplexMeasurementsByHost(hostId);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -38,8 +40,8 @@ public class ComplexMeasurementsDefinitionController {
 
     @RequestMapping(value = "/{measurementid}", method = RequestMethod.DELETE, produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> removeComplexMeasurement(@PathVariable(value = "hostid") String hostId,
-                                                                 @PathVariable(value = "measurementid") Integer measurementId){
-        complexMeasurementsDefinitionManager.removeComplexMeasurement(measurementId);
+                                                                 @PathVariable(value = "measurementName") String measurementName){
+        complexMeasurementsDefinitionManager.removeComplexMeasurement(measurementName);
         return new ResponseEntity<String>( HttpStatus.NO_CONTENT);
     }
 }

@@ -6,9 +6,10 @@ package org.developers.monitor.rest.dto;
 public class ComplexMeasurementDefinitionDTO {
 
     public String measurementType;
-    public String userId;
-    public String timeRange;
-    public String interval;
+    public Integer userId;
+    public Integer timeRange;
+    public Integer interval;
     public String unitType; // [SECOND, MINUTE, HOUR]
-    public String id;
+    public Integer id;
+    public String hostId;
 }
