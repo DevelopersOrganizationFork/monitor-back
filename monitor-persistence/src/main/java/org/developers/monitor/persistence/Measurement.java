@@ -46,7 +46,7 @@ public class Measurement implements Serializable {
     @Column(name = "Host_hostId")
     private String hosthostId;
     @Column(name = "measurementDate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date measurementDate;
 
     public Measurement() {

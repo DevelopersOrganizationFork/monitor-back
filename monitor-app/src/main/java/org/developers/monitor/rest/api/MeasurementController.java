@@ -75,7 +75,7 @@ public class MeasurementController {
         .collect(Collectors.toList());
     
         //List<MeasurementDTO> countMeasurements
-         return countMeasurements
+         return countMeasurements;
     }
 
 }

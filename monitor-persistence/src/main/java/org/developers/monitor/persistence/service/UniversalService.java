@@ -154,7 +154,7 @@ public class UniversalService {
             
             Measurement measurement = new Measurement();
             measurement.setHosthostId(hostId);
-            measurement.setMeasurementDate(new Date());
+            measurement.setMeasurementDate(measurementData.date);
             measurement.setMeasurementPK(measurementPK);
             
             return measurementDao.persist(measurement).getMeasurementPK().getMeasurementId();
