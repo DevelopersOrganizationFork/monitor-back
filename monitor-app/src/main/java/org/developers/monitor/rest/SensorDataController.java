@@ -6,6 +6,8 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.jms.JMSException;
 import org.developers.monitor.persistence.Cpu;
 import org.developers.monitor.persistence.Disk;
@@ -33,7 +35,7 @@ public class SensorDataController {
     private static final String  NUMBER_OF_ITEMS = "NumberOfItems";
     @Autowired
     private UniversalService universalService;
-    private  JMSConnection jmsConnnection ;//= new JMSConnection();
+    private  JMSConnection jmsConnnection;
     final int numberOfItems = Integer.parseInt(ConfigLoader.properties.getProperty(NUMBER_OF_ITEMS));
 
     
@@ -94,12 +96,17 @@ public class SensorDataController {
             
             JsonNode networkNode = root.path("measurement").path("network");
             
-//            network.setNetworkDownload(BigInteger.valueOf(500));
             network.setNetworkIP(networkNode.path("ip").asText());
             network.setNetworkMAC(networkNode.path("mac").asText());
-//            network.setNetworkUpload(networkNode.path("write").bigIntegerValue());
             
-            MeasurementData ms = new MeasurementData(host, cpu, disk, memory, network);
+            JsonNode newtorkStatNode = root.path("measurement").path("network").path("stat");
+            network.setNetworkDownload(newtorkStatNode.path("read").bigIntegerValue());
+            network.setNetworkUpload(newtorkStatNode.path("write").bigIntegerValue());
+            
+            long miliSec = root.path("date").asLong();
+            Date date = new Date(miliSec);
+            
+            MeasurementData ms = new MeasurementData(host, cpu, disk, memory, network, date);
             Integer id = universalService.insertMeasurementData(ms);
             System.out.println("Id measurementu = " + id);
         }
