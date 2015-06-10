@@ -1,7 +1,9 @@
 package org.developers.monitor.rest.api;
 
+import org.developers.monitor.measurement.provider.MeasurementProvider;
 import org.developers.monitor.persistence.DAO.HostDao;
 import org.developers.monitor.rest.dto.HostDto;
+import org.developers.monitor.rest.dto.MeasurementDTO;
 import org.developers.monitor.rest.dto.mapper.HostMapper;
 import org.developers.monitor.rest.support.RestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class HostsController {
     
     @Autowired
     HostDao hostDao;
+    @Autowired
+    MeasurementProvider measurementProvider;
 
     @RequestMapping(value = "/{hostid}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}) 
     public HostDto getHostById(@PathVariable("hostid") String hostid){
@@ -39,7 +43,7 @@ public class HostsController {
     }
     
     @RequestMapping(value = "/topten", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<HostDto> getTopTenHosts() {
-        return null;
+    public List<HostDto> getTopTenHosts(@RequestParam(value = "measurementType", required = false) MeasurementDTO.Type measurementType) {
+        return new HostMapper().mapList(hostDao.getAllHosts());
     }
 }
