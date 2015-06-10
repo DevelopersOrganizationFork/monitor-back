@@ -32,7 +32,7 @@ public class ComplexMeasurementsDefinitionController {
         return complexMeasurementsDefinitionManager.getComplexMeasurementsByHost(hostId);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> createComplexMeasurement(@PathVariable(value = "hostid") String hostId, @RequestBody ComplexMeasurementDefinitionDTO complexMeasurementDefinitionDTO) {
         String defId = complexMeasurementsDefinitionManager.createComplexMeasurement(complexMeasurementDefinitionDTO, hostId) + "";
         return new ResponseEntity<String>(defId, HttpStatus.CREATED);
