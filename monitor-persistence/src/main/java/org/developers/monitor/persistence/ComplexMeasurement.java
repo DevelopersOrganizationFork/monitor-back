@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ComplexMeasurement.findByTimeRange", query = "SELECT c FROM ComplexMeasurement c WHERE c.timeRange = :timeRange"),
     @NamedQuery(name = "ComplexMeasurement.findByMeasurementInterval", query = "SELECT c FROM ComplexMeasurement c WHERE c.measurementInterval = :measurementInterval"),
     @NamedQuery(name = "ComplexMeasurement.findByUnitType", query = "SELECT c FROM ComplexMeasurement c WHERE c.unitType = :unitType"),
-    @NamedQuery(name = "ComplexMeasurement.findByMeasurementType", query = "SELECT c FROM ComplexMeasurement c WHERE c.measurementType = :measurementType")})
+    @NamedQuery(name = "ComplexMeasurement.findByMeasurementType", query = "SELECT c FROM ComplexMeasurement c WHERE c.measurementType = :measurementType"),
+    @NamedQuery(name = "ComplexMeasurement.findByHosthostId", query = "SELECT c FROM ComplexMeasurement c WHERE c.hosthostId = :hosthostId")})
 public class ComplexMeasurement implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,6 +56,9 @@ public class ComplexMeasurement implements Serializable {
     @Size(max = 20)
     @Column(name = "measurementType")
     private String measurementType;
+    @Size(max = 50)
+    @Column(name = "Host_hostId")
+    private String hosthostId;
 
     public ComplexMeasurement() {
     }
@@ -114,6 +118,14 @@ public class ComplexMeasurement implements Serializable {
 
     public void setMeasurementType(String measurementType) {
         this.measurementType = measurementType;
+    }
+
+    public String getHosthostId() {
+        return hosthostId;
+    }
+
+    public void setHosthostId(String hosthostId) {
+        this.hosthostId = hosthostId;
     }
 
     @Override
