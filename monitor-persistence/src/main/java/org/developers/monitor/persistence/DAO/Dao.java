@@ -33,8 +33,10 @@ public abstract class Dao<K, E> implements IDao<K, E> {
     }
  
     @Override
-    public E persist(E entity) { 
-        entityManager.getTransaction().begin();
+    public E persist(E entity) {
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
         return entity;
@@ -42,14 +44,18 @@ public abstract class Dao<K, E> implements IDao<K, E> {
  
     @Override
     public void remove(E entity) {
-        entityManager.getTransaction().begin();
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
     }
  
     @Override
     public E findById(K id) {
-        entityManager.getTransaction().begin();
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         E entity = entityManager.find(entityClass, id); 
         entityManager.getTransaction().commit();
         return entity;
