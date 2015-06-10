@@ -4,6 +4,7 @@ import org.developers.monitor.persistence.ComplexMeasurement;
 import org.developers.monitor.persistence.DAO.ComplexMeasurementDao;
 import org.developers.monitor.rest.dto.ComplexMeasurementDefinitionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by reynev on 6/10/15.
  */
+@Component
 public class ComplexMeasurementsDefinitionManagerImpl implements ComplexMeasurementsDefinitionManager {
 
     @Autowired
