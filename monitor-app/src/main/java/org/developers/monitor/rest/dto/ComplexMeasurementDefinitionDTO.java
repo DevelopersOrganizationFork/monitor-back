@@ -12,4 +12,5 @@ public class ComplexMeasurementDefinitionDTO {
     public String unitType; // [SECOND, MINUTE, HOUR]
     public Integer id;
     public String hostId;
+    public String name;
 }

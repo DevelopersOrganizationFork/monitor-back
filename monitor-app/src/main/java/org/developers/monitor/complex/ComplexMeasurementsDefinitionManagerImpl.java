@@ -32,6 +32,7 @@ public class ComplexMeasurementsDefinitionManagerImpl implements ComplexMeasurem
             definitionDTO.userId = complexMeasurement.getUsersidUser();
             definitionDTO.measurementType = complexMeasurement.getMeasurementType();
             definitionDTO.hostId = hostId;
+            definitionDTO.name = complexMeasurement.getName();
 
             definitionDTOs.add(definitionDTO);
         }
@@ -53,7 +54,8 @@ public class ComplexMeasurementsDefinitionManagerImpl implements ComplexMeasurem
         complexMeasurement.setTimeRange(complexMeasurementDTO.timeRange);
         complexMeasurement.setMeasurementType(complexMeasurementDTO.measurementType);
         complexMeasurement.setUnitType(complexMeasurementDTO.unitType);
-        complexMeasurement.setUsersidUser(complexMeasurementDTO.userId);
+        //complexMeasurement.setUsersidUser(complexMeasurementDTO.userId);
+        complexMeasurement.setName(complexMeasurementDTO.name);
 
         complexMeasurement = complexMeasurementDao.persist(complexMeasurement);
 
