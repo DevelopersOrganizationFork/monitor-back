@@ -12,5 +12,5 @@ public interface ComplexMeasurementsDefinitionManager {
 
     public List<ComplexMeasurementDefinitionDTO> getComplexMeasurementsByHost(String hostId);
     public void removeComplexMeasurement(String name);
-    public int createComplexMeasurement(ComplexMeasurementDefinitionDTO complexMeasurementDTO);
+    public int createComplexMeasurement(ComplexMeasurementDefinitionDTO complexMeasurementDTO, String hostId);
 }

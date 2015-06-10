@@ -4,6 +4,7 @@ import org.developers.monitor.persistence.ComplexMeasurement;
 import org.developers.monitor.persistence.DAO.ComplexMeasurementDao;
 import org.developers.monitor.rest.dto.ComplexMeasurementDefinitionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,23 @@ public class ComplexMeasurementsDefinitionManagerImpl implements ComplexMeasurem
 
     @Override
     public void removeComplexMeasurement(String name) {
-
+        ComplexMeasurement complexMeasurement = complexMeasurementDao.getComplexMeasurementByName(name);
+        complexMeasurementDao.remove(complexMeasurement);
     }
 
     @Override
-    public int createComplexMeasurement(ComplexMeasurementDefinitionDTO complexMeasurementDTO) {
-        return 0;
+    public int createComplexMeasurement(ComplexMeasurementDefinitionDTO complexMeasurementDTO, String hostId) {
+        ComplexMeasurement complexMeasurement = new ComplexMeasurement();
+
+        complexMeasurement.setHosthostId(hostId);
+        complexMeasurement.setMeasurementInterval(complexMeasurementDTO.interval);
+        complexMeasurement.setTimeRange(complexMeasurementDTO.timeRange);
+        complexMeasurement.setMeasurementType(complexMeasurementDTO.measurementType);
+        complexMeasurement.setUnitType(complexMeasurementDTO.unitType);
+        complexMeasurement.setUsersidUser(complexMeasurementDTO.userId);
+
+        complexMeasurement = complexMeasurementDao.persist(complexMeasurement);
+
+        return complexMeasurement.getComplexMeasurementId();
     }
 }
