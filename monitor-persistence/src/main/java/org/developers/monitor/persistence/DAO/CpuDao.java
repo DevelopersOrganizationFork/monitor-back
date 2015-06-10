@@ -20,4 +20,11 @@ public class CpuDao extends Dao<Integer, Cpu> {
         return entityManager.createNamedQuery("Cpu.findAll", Cpu.class)
             .getResultList();
     }
+    
+    public List<Cpu> getCpus(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Cpu.findAll", Cpu.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 }

@@ -20,4 +20,11 @@ public class DiskDao extends Dao<Integer, Disk> {
         return entityManager.createNamedQuery("Disk.findAll", Disk.class)
             .getResultList();
     }
+    
+    public List<Disk> getDisks(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Disk.findAll", Disk.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 }

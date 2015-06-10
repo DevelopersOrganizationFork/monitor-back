@@ -24,6 +24,13 @@ public class HostDao extends Dao<String, Host> {
             .getResultList();
     }
     
+    public List<Host> getHosts(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Host.findAll", Host.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
+    
     public Host getHostByName(String hostName)
     {
         return entityManager.createNamedQuery("Host.findByHostName", Host.class)

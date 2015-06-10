@@ -30,5 +30,11 @@ public class MeasurementDao extends Dao<Integer, Measurement> {
             .getResultList();
     }
 
+    public List<Measurement> getMeasurements(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Measurement.findAll", Measurement.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 
 }

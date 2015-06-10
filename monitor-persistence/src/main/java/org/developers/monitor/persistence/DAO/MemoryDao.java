@@ -20,4 +20,11 @@ public class MemoryDao extends Dao<Integer, Memory> {
         return entityManager.createNamedQuery("Memory.findAll", Memory.class)
             .getResultList();
     }
+    
+    public List<Memory> getMemories(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Memory.findAll", Memory.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 }

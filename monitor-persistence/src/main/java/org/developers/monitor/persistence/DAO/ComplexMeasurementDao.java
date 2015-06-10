@@ -20,4 +20,11 @@ public class ComplexMeasurementDao extends Dao<Integer, ComplexMeasurement>{
         return entityManager.createNamedQuery("ComplexMeasurement.findAll", ComplexMeasurement.class)
             .getResultList();
     }
+    
+        public List<ComplexMeasurement> getComplexMeasurements(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("ComplexMeasurement.findAll", ComplexMeasurement.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 }

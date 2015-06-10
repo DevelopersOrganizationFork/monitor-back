@@ -35,6 +35,13 @@ public class UserDao extends Dao<Integer, Users> {
             .getResultList();
     }
     
+    public List<Users> getUsers(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Users.findAll", Users.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
+    
     public Users getUserById(Integer id) throws UserNotFoundException
     {
         try 

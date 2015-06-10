@@ -20,4 +20,11 @@ public class NetworkDao extends Dao<Integer, Network> {
         return entityManager.createNamedQuery("Network.findAll", Network.class)
             .getResultList();
     }
+    
+    public List<Network> getNetworks(Integer maxRows)
+    {
+        return entityManager.createNamedQuery("Network.findAll", Network.class)
+            .setMaxResults(maxRows)
+            .getResultList();
+    }
 }
