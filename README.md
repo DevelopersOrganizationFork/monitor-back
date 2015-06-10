@@ -10,7 +10,10 @@
 
 ### Instalacja (monitor-back/installer):
 
-`ant install` (ant)
+`ant install` (ant) - instaluje projekt w folderze c:/monitor-back/ projekt zawiera activemq oraz tomcata
+`ant install-tomcat` - instaluje projekt ww folderze nie usuwajac activemq
+`ant deploy-app` - deploy applikacji bezposrednio do tomcata
+`ant server-uninstall` - odinstalowuje projekt (usuwa folder monitor-back)
 
 ant version >= 1.8.2
 
