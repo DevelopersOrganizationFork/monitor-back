@@ -38,6 +38,14 @@ public class HelloController {
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HelloMessage hello() {
+        Users users = new Users();
+        users.setUserName("admin");
+        users.setUserPassword("admin");
+        try {
+            us.insertUser(users);
+        } catch (UserAlreadyExistException e) {
+            throw new RuntimeException(e);
+        }
         
         /*
             --> Do usunięcia - wrzucone w celu pokazania, że działa i jak tego używac

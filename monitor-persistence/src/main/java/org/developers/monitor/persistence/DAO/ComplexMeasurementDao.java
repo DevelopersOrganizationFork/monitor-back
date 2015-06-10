@@ -21,10 +21,17 @@ public class ComplexMeasurementDao extends Dao<Integer, ComplexMeasurement>{
             .getResultList();
     }
     
-        public List<ComplexMeasurement> getComplexMeasurements(Integer maxRows)
+    public List<ComplexMeasurement> getComplexMeasurements(Integer maxRows)
     {
         return entityManager.createNamedQuery("ComplexMeasurement.findAll", ComplexMeasurement.class)
             .setMaxResults(maxRows)
             .getResultList();
+    }
+    
+    public List<ComplexMeasurement> getAllComplexMeasurementsByHost(String hostId)
+    {
+        return entityManager.createNamedQuery("ComplexMeasurement.findByHosthostId", ComplexMeasurement.class)
+                .setParameter("hosthostId", hostId)
+                .getResultList();
     }
 }

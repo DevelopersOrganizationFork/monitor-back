@@ -37,4 +37,9 @@ public class HostsController {
                 : hostDtos;
        
     }
+    
+    @RequestMapping(value = "/topten", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<HostDto> getTopTenHosts() {
+        return null;
+    }
 }
