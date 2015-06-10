@@ -2,7 +2,6 @@ package org.developers.monitor.rest.api;
 
 import org.developers.monitor.measurement.provider.MeasurementProvider;
 import org.developers.monitor.rest.converter.DateConverter;
-import org.developers.monitor.rest.dto.ComplexMeasurementDTO;
 import org.developers.monitor.rest.dto.MeasurementDTO;
 import org.developers.monitor.rest.dto.MeasurementInfo;
 import org.developers.monitor.rest.support.RestConfig;
@@ -38,35 +37,39 @@ public class MeasurementController {
                                                 ) {
         
         List<MeasurementDTO> result = new ArrayList<>();
+
+        result = provideFilteredMeasurements(hostId, measurementName, lastCount, fromDateValue, toDateValue);
+
+
+        return result;
+    }
+    
+    /*@RequestMapping(value = "/{measurementid}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<MeasurementDTO> getHost(@PathVariable(value = "hostid") String hostId,
+                                        @PathVariable("measurementid") int measurementId){
+        return measurementProvider.getMeasurementsByTypeAndId(hostId, measurementId);
+    }*/
+    
+    private List<MeasurementDTO> provideFilteredMeasurements(
+            String hostId, 
+            String measurementName,
+            Integer lastCount, 
+            String fromDateValue, 
+            String toDateValue) {
         
+        List <MeasurementDTO> measurements = new ArrayList<>();
+
         if ("CPU".equals(measurementName)
                 || "MEMORY".equals(measurementName)
                 || "NETWORKUP".equals(measurementName)
                 || "NETWORKDOWN".equals(measurementName)
                 ) {
-                result = provideFilteredMeasurements(hostId, measurementName, lastCount, fromDateValue, toDateValue);
+            measurements.addAll(measurementProvider.getMeasurementsByType(hostId, MeasurementDTO.Type.valueOf(measurementName)));
         } else {
-            //try to get complex measurement with given {measurementName}
+            measurements.addAll(measurementProvider.getComplexMeasurements(hostId, measurementName));
+
         }
-        
-        return result;
-    }
-    
-    @RequestMapping(value = "/{type}/{measurementid}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public MeasurementDTO getHost(@PathVariable("measurementid") int measurementId,
-                               @PathVariable(value = "type") MeasurementDTO.Type measuremenType){
-        return measurementProvider.getMeasurementByTypeAndId(measuremenType, measurementId);
-    }
-    
-    private List<MeasurementDTO> provideFilteredMeasurements(
-            String hostId, 
-            String measuremenName, 
-            Integer lastCount, 
-            String fromDateValue, 
-            String toDateValue) {
-        
-        List <MeasurementDTO> measurements = measurementProvider.getMeasurementsByType(hostId, MeasurementDTO.Type.valueOf(measuremenName));
-        
+
         boolean isLastCountActive = false;
         
         if (lastCount != null) {

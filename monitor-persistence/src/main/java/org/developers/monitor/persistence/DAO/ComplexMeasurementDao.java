@@ -34,4 +34,11 @@ public class ComplexMeasurementDao extends Dao<Integer, ComplexMeasurement>{
                 .setParameter("hosthostId", hostId)
                 .getResultList();
     }
+
+    public ComplexMeasurement getComplexMeasurementByName(String name)
+    {
+        return entityManager.createNamedQuery("ComplexMeasurement.findByName", ComplexMeasurement.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }
