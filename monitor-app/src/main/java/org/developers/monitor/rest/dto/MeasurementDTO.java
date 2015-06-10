@@ -21,6 +21,6 @@ public class MeasurementDTO {
     public double value;
     public int id;
     public boolean isComplex = false;
-    public String hostId = "SYSTEM";
+    public String ownerUser = "SYSTEM";
   
 }

@@ -68,11 +68,14 @@ public class MeasurementController {
             Date toDate = DateConverter.convertStringToDate(toDateValue);
         }
     
-        return measurements
+        List<MeasurementDTO> countMeasurements =  measurements
                 .stream()
                 .sorted((m1, m2) -> Long.signum(m2.date.getTime() - m1.date.getTime()))
                 .limit(isLastCoundActive ? lastCount : 10)
         .collect(Collectors.toList());
+    
+        //List<MeasurementDTO> countMeasurements
+         return countMeasurements
     }
 
 }
