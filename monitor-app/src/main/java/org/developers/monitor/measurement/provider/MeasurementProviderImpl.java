@@ -24,7 +24,7 @@ public class MeasurementProviderImpl implements MeasurementProvider {
     private MeasurementDao measurementDao;
 
     @Override
-    public List<MeasurementDTO> getAllMeasurements(int hostId) {
+    public List<MeasurementDTO> getAllMeasurements(String hostId) {
         List<Measurement> measurementsByHost = measurementDao.findByHostId(hostId);
 
         List<MeasurementDTO> measurementsDTO = new ArrayList<>();
@@ -40,7 +40,7 @@ public class MeasurementProviderImpl implements MeasurementProvider {
     }
 
     @Override
-    public List<MeasurementDTO> getMeasurementsByType(int hostId, MeasurementDTO.Type type) {
+    public List<MeasurementDTO> getMeasurementsByType(String hostId, MeasurementDTO.Type type) {
         List<Measurement> measurementsByHost = measurementDao.findByHostId(hostId);
 
         List<MeasurementDTO> measurementsDTO = new ArrayList<>();

@@ -24,13 +24,13 @@ import static org.developers.monitor.rest.dto.MeasurementDTO.Type.CPU;
 @Service
 public class MeasurementConverterImpl implements MeasurementConverter {
 
-    //@Autowired
+    @Autowired
     private NetworkDao networkDao;
     
-    //@Autowired
+    @Autowired
     private CpuDao cpuDao;
     
-    //@Autowired
+    @Autowired
     private MemoryDao memoryDao;
 
     @Override
@@ -80,7 +80,9 @@ public class MeasurementConverterImpl implements MeasurementConverter {
     private int computeNetworkUpValue(Measurement measurement) {
         int networkId = measurement.getMeasurementPK().getNetworknetworkId();
         Network network = networkDao.findById(networkId);
-        int networkUpValue = network.getNetworkUpload().intValue();
+        int networkUpValue = network.getNetworkUpload() != null 
+                ? network.getNetworkUpload().intValue()
+                : 0;
         return networkUpValue;
     }
 
@@ -94,7 +96,9 @@ public class MeasurementConverterImpl implements MeasurementConverter {
     private int computeNetworkDownValue(Measurement measurement) {
         int networkId = measurement.getMeasurementPK().getNetworknetworkId();
         Network network = networkDao.findById(networkId);
-        int networkDownValue = network.getNetworkDownload().intValue();
+        int networkDownValue = network.getNetworkDownload() != null 
+                ? network.getNetworkDownload().intValue()
+                : 0;
         return networkDownValue;
     }
 

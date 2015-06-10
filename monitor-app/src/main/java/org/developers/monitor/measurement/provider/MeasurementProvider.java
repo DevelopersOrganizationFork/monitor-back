@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface MeasurementProvider {
 
-    List<MeasurementDTO> getAllMeasurements(int hostId);
-    List<MeasurementDTO> getMeasurementsByType(int hostId, MeasurementDTO.Type type);
+    List<MeasurementDTO> getAllMeasurements(String hostId);
+    List<MeasurementDTO> getMeasurementsByType(String hostId, MeasurementDTO.Type type);
     MeasurementDTO getMeasurementByTypeAndId(MeasurementDTO.Type measuremenType, int measurementId);
 }

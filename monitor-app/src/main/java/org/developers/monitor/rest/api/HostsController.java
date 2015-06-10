@@ -24,7 +24,7 @@ public class HostsController {
     HostDao hostDao;
 
     @RequestMapping(value = "/{hostid}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE}) 
-    public HostDto getHostById(@PathVariable("hostid") int hostid){
+    public HostDto getHostById(@PathVariable("hostid") String hostid){
         return new HostMapper().map(hostDao.getHostById(hostid));        
     }
     

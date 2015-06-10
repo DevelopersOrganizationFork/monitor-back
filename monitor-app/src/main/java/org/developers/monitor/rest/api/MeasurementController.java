@@ -21,12 +21,12 @@ public class MeasurementController {
     MeasurementProvider measurementProvider;
     
     @RequestMapping(value = "", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<MeasurementDTO> getMeasurements(@PathVariable(value = "hostid") int hostId){
+    public List<MeasurementDTO> getMeasurements(@PathVariable(value = "hostid") String hostId){
         return measurementProvider.getAllMeasurements(hostId);
     }
     
     @RequestMapping(value = "/{type}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<MeasurementDTO> getMeasurements(@PathVariable(value = "hostid") int hostId,
+    public List<MeasurementDTO> getMeasurements(@PathVariable(value = "hostid") String hostId,
                                                 @PathVariable(value = "type") MeasurementDTO.Type measuremenType) {
         return measurementProvider.getMeasurementsByType(hostId, measuremenType);
     }

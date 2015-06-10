@@ -18,8 +18,10 @@ import java.util.List;
 public class MeasurementDao extends Dao<Integer, Measurement> {
 
 
-    public List<Measurement> findByHostId(Integer id) {
-        return null;
+    public List<Measurement> findByHostId(String id) {
+        return entityManager.createNamedQuery("Measurement.findByHosthostId", Measurement.class)
+                .setParameter("hosthostId", id)
+                .getResultList();
     }
     
     public List<Measurement> getAllMeasurements()

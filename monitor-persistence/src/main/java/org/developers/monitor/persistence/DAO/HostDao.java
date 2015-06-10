@@ -34,7 +34,7 @@ public class HostDao extends Dao<String, Host> {
                 .orElse(new Host());
     }
     
-    public Host getHostById(int hostId)
+    public Host getHostById(String hostId)
     {
         return entityManager.createNamedQuery("Host.findByHostId", Host.class)
                 .setParameter("hostId", hostId)
