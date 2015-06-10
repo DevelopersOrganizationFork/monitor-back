@@ -33,6 +33,22 @@ public class MeasurementProviderImpl implements MeasurementProvider {
     private ComplexMeasurementDao complexMeasurementDao;
 
     @Override
+    public List<MeasurementDTO> getAllMeasurements() {
+        List<Measurement> measurementsByHost = measurementDao.getAllMeasurements();
+
+        List<MeasurementDTO> measurementsDTO = new ArrayList<>();
+
+        if(measurementsByHost != null) {
+            for (Measurement measurement : measurementsByHost) {
+                List<MeasurementDTO> convertedSingleMeasurement = measurementConverter.convertToDTO(measurement);
+                measurementsDTO.addAll(convertedSingleMeasurement);
+            }
+        }
+
+        return measurementsDTO;
+    }
+    
+    @Override
     public List<MeasurementDTO> getAllMeasurements(String hostId) {
         List<Measurement> measurementsByHost = measurementDao.findByHostId(hostId);
 
