@@ -94,7 +94,7 @@ public class MeasurementController {
     
         measurements =  measurements
                 .stream()
-                .sorted((m1, m2) -> Long.signum(m2.date.getTime() - m1.date.getTime()))
+                .sorted((m1, m2) -> -Integer.compare(m1.id, m2.id))
                 .limit(isLastCountActive ? lastCount : 10)
         .collect(Collectors.toList());
         
